@@ -1,13 +1,11 @@
----
-
 # Projeto de Scraping Amazon
 
 ## 1. Descrição do Projeto
 
 Este projeto permite buscar produtos na Amazon através de uma palavra-chave. Ele consiste em:
 
-* **Backend**: API em Bun + Express que faz scraping da Amazon usando `axios` e `jsdom`.
-* **Frontend**: Página web simples com Vite, HTML, CSS e JavaScript puro, consumindo a API e exibindo os resultados.
+- **Backend**: API em Bun + Express que faz scraping da Amazon usando `axios` e `jsdom`.
+- **Frontend**: Página web simples com Vite, HTML, CSS e JavaScript puro, consumindo a API e exibindo os resultados.
 
 ---
 
