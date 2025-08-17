@@ -1,113 +1,201 @@
-# Projeto de Scraping Amazon
+# 🛒 Amazon Scraping Project
 
-## 1. Descrição do Projeto
-
-Este projeto permite buscar produtos na Amazon através de uma palavra-chave. Ele consiste em:
-
-- **Backend**: API em Bun + Express que faz scraping da Amazon usando `axios` e `jsdom`.
-- **Frontend**: Página web simples com Vite, HTML, CSS e JavaScript puro, consumindo a API e exibindo os resultados.
+![Bun](https://img.shields.io/badge/Runtime-Bun-%23000000?logo=bun&logoColor=white)
+![Express](https://img.shields.io/badge/Backend-Express-blue?logo=express)
+![Vite](https://img.shields.io/badge/Frontend-Vite-%23646CFF?logo=vite&logoColor=yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
-## 2. Backend
+## 📌 Project Description
 
-### 2.1. Pré-requisitos
+This project allows you to search for products on Amazon using a keyword. It consists of:
 
-- [Bun](https://bun.sh)
-- Node.js (opcional, caso queira usar pacotes npm compatíveis)
+- ⚙️ **Backend**: Bun + Express API that scrapes Amazon using `axios` and `jsdom`.
+- 🖥️ **Frontend**: Simple web page built with Vite, HTML, CSS, and plain JavaScript, consuming the API and displaying results.
 
-### 2.2. Instalação
+---
 
-1. Clone o repositório:
+## 📂 Project Structure
+
+```
+.
+├── backend/
+│   ├── node_modules/
+│   ├── src/
+│   │   ├── controller/
+│   │   │   └── scraperController.ts
+│   │   ├── middlewares/
+│   │   │   └── keywordCheck.ts
+│   │   ├── model/
+│   │   │   └── scraperModel.ts
+│   │   ├── routes/
+│   │   │   └── scraperRoutes.ts
+│   │   └── service/
+│   │       └── scraperService.ts
+│   ├── .gitignore
+│   ├── bun.lockb
+│   ├── config.ts
+│   ├── index.ts
+│   ├── package.json
+│   ├── tsconfig.json
+├── frontend/
+│   ├── node_modules/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── main.js
+│   │   └── style.css
+│   ├── .gitignore
+│   ├── bun.lockb
+│   ├── index.html
+│   ├── package.json
+│   └── README.md
+```
+
+---
+
+## 🔄 System Flow (Diagram)
+
+```txt
+         👤 User
+           │
+           │ (1) enters keyword + clicks "Search"
+           ▼
+    🌐 Frontend (Vite + JS)
+           │
+           │ (2) sends GET /api/scrape?keyword=...
+           ▼
+ ⚙️ Backend (Bun + Express + Axios + JSDOM)
+           │
+           │ (3) scrapes Amazon results page
+           ▼
+     🛒 Amazon Website
+           │
+           │ (4) returns HTML data
+           ▼
+ ⚙️ Backend parses data → JSON response
+           │
+           │ (5) returns products (title, rating, reviews, image)
+           ▼
+    🌐 Frontend renders product list
+           │
+           ▼
+         👤 User sees formatted results
+```
+
+---
+
+## 🚀 Quick Links
+
+- 📂 [Backend Setup](#️-backend)
+- 🖥️ [Frontend Setup](#-frontend)
+- 🔗 [API Endpoint](#-endpoint)
+- ⚠️ [Notes](#️-notes)
+
+---
+
+## 🚀 How to Run the Project
+
+Clone the repository:
 
 ```bash
-git clone <seu-repositorio>
+git clone git@github.com:ArlessonMoura/scraper.git
+```
+
+### ✅ Prerequisites
+
+- [Bun](https://bun.sh) must be installed.
+
+---
+
+## ⚙️ Backend
+
+### 📥 Installation
+
+- Navigate to the backend folder:
+
+```bash
 cd backend
 ```
 
-2. Instale as dependências:
+- Install dependencies:
 
 ```bash
 bun install
-bun add express axios jsdom
 ```
 
-### 2.3. Execução
+### ▶️ Execution
+
+Run normally:
 
 ```bash
 bun run index.js
 ```
 
-O backend estará rodando em `http://localhost:3000`.
+Or with **hot reload**:
 
-### 2.4. Endpoint
+```bash
+bun dev
+```
 
-- **GET /api/scrape?keyword=PALAVRA_CHAVE**
-  Retorna os produtos encontrados em JSON, incluindo:
-
-  - `title` — título do produto
-  - `rating` — avaliação (estrelas de 1 a 5)
-  - `reviews` — número de avaliações
-  - `image` — URL da imagem do produto
+📡 The backend will be available at: `http://localhost:3000`
 
 ---
 
-## 3. Frontend
+### 🔗 Endpoint
 
-### 3.1. Pré-requisitos
+- **GET /api/scrape?keyword=YOUR_KEYWORD**
+  Returns products in JSON format, including:
 
-- [Node.js](https://nodejs.org/)
-- NPM ou Yarn
+  - 🏷️ `title` — product title
+  - ⭐ `rating` — rating (1 to 5 stars)
+  - 📝 `reviews` — number of reviews
+  - 🖼️ `image` — product image URL
 
-### 3.2. Instalação
+---
 
-1. Navegue até a pasta frontend:
+## 🎨 Frontend
+
+### 📥 Installation
+
+Navigate to the frontend folder:
 
 ```bash
 cd frontend
 ```
 
-2. Instale as dependências:
+Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
-### 3.3. Execução
+### ▶️ Execution
 
 ```bash
-npm run dev
+bun dev
 ```
 
-O frontend estará rodando no endereço mostrado no terminal (geralmente `http://localhost:5173`).
-
-### 3.4. Funcionalidades
-
-- Campo de entrada para digitar a palavra-chave.
-- Botão "Buscar" para iniciar o scraping.
-- Exibição formatada dos produtos encontrados:
-
-  - Imagem
-  - Título
-  - Avaliação e número de reviews
+🌐 The frontend will run at the address shown in the terminal (usually `http://localhost:5173`).
 
 ---
 
-## 4. Observações
+### ✨ Features
 
-- Pode ser necessário adicionar [CORS](https://www.npmjs.com/package/cors) no backend se houver problemas de requisição do frontend:
+- 🔎 Input field to type a keyword.
+- 📤 "Search" button to trigger scraping.
+- 📋 Display of formatted product results:
 
-```bash
-bun add cors
-```
+  - 🖼️ Image
+  - 🏷️ Title
+  - ⭐ Rating and reviews
 
-```javascript
-import cors from 'cors';
-app.use(cors());
-```
+---
 
-- A Amazon pode bloquear requisições automatizadas em produção. Para uso real, considere proxies ou APIs oficiais.
+## ⚠️ Notes
 
-- Todos os arquivos possuem comentários explicando a lógica de implementação.
+- 🚧 Amazon may block automated requests in production. For real-world usage, consider proxies or official APIs.
+- 📝 All files contain comments explaining the implementation logic.
 
 ---
