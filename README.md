@@ -195,7 +195,7 @@ bun dev
 
 ## ⚠️ Notes
 
-- 🚧 Amazon may block automated requests in production. For real-world usage, consider proxies or official APIs.
+- 🚧 Amazon may block automated requests in production. For real-world usage, consider proxies or official APIs (I was unable to bypass Amazon blocks with only the permitted tools.).
 - 📝 All files contain comments explaining the implementation logic.
 
 ---
