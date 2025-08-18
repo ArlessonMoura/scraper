@@ -14,7 +14,7 @@ export const keywordCheck = (
   if (!keyword || typeof keyword !== 'string' || !keyword.trim()) {
     return res.status(400).json({
       message: 'Keyword parameter is required and must be a non-empty string',
-      example: '/api/scraper?keyword=laptop',
+      example: '/api/scrape?keyword=laptop',
     });
   }
 

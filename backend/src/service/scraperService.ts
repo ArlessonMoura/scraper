@@ -23,7 +23,13 @@ export const getScraperData = async (
 
     // Fetch the HTML content from the URL
     const html = await scraperModel.getScraperData(url);
-    if (!html) return null;
+
+    if (!html) {
+      console.error('No HTML received from scraperModel');
+      return null;
+    }
+
+    console.log('HTML snippet:', html.slice(0, 500)); // Mostra primeiros 500 caracteres
 
     // Create a DOM object from the HTML content
     const dom = new JSDOM(html);

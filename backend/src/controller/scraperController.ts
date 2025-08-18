@@ -17,7 +17,7 @@ export const getScraperData = async (req: Request, res: Response): Promise<Respo
     const response = await scraperService.getScraperData(keyword);
 
     // If the response is falsy, return a 503 error.
-    if (!response) {
+    if (response === null) {
       return res.status(503).json({ message: 'Service Unavailable' });
     }
 
